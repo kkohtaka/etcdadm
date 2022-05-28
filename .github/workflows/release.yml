@@ -8,7 +8,10 @@ on:
     branches:
       - master
   release:
-    types: [created]
+    types:
+      - created
+    tags:
+      - "v*.*.*"
 
 jobs:
   generate:
