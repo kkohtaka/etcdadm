@@ -8,7 +8,10 @@ on:
     branches:
       - master
   release:
-    types: [created]
+    types:
+      - created
+    tags:
+      - "v*.*.*"
 
 jobs:
   generate:
@@ -32,11 +35,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-go-
 
-      - run: make etcdadm
+      - run: |
+          make etcdadm
+          mv etcdadm etcdadm-linux-amd64
 
       - if: github.event_name == 'release'
         uses: skx/github-action-publish-binaries@release-2.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: etcdadm
+          args: etcdadm-linux-amd64
