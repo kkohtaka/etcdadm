@@ -149,6 +149,19 @@ func (l URLList) String() string {
 	return strings.Join(stringURLs, ",")
 }
 
+func (l *URLList) Set(v string) error {
+	u, err := url.ParseRequestURI(v)
+	if err != nil {
+		return err
+	}
+	*l = append(*l, *u)
+	return nil
+}
+
+func (l *URLList) Type() string {
+	return "URLList"
+}
+
 // UnmarshalJSON implements a JSON deserialization, as a comma separated list.
 func (l *URLList) UnmarshalJSON(j []byte) error {
 	var s string

@@ -53,6 +53,7 @@ func init() {
 	initCmd.PersistentFlags().StringVar(&etcdAdmConfig.ImageRepository, "image-repository", constants.DefaultImageRepository, "image repository when using kubelet init system")
 	initCmd.PersistentFlags().StringVar(&etcdAdmConfig.DataDir, "data-dir", constants.DefaultDataDir, "etcd data directory")
 	initCmd.PersistentFlags().StringVar(&etcdAdmConfig.PodSpecDir, "kubelet-pod-manifest-path", constants.DefaultPodSpecDir, "kubelet podspec directory")
+	initCmd.PersistentFlags().Var(&etcdAdmConfig.ListenMetricsURLs, "listen-metrics-url", "List of additional URLs to listen on that will respond to both the /metrics and /health endpoints")
 
 	runner.registerPhasesAsSubcommands(initCmd)
 }
